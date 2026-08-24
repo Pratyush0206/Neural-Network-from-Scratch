@@ -2,24 +2,32 @@ import sigmoid
 import numpy as np
 
 num_input=int(input())
-num_neuron=int(input())
+layer_size=[num_input,5,5,5,1]
 
 l=[]
 for _ in range(num_input):
     l.append(float(input()))
-
+    
 arr=np.array(l)
 input_arr=arr.reshape(1,num_input)
 
-weight_list=np.random.uniform(-1,1 ,size=(num_input,num_neuron))
+weights=[]
 
-bias=np.random.uniform(-1,1,size=num_neuron)
+for i in range(len(layer_size)-1):
+    w=np.random.uniform(-1,1 ,size=(layer_size[i],layer_size[i+1]))
+    weights.append(w)
 
-z=input_arr @ weight_list +bias
+bias=[]
 
-print(z.shape)
+for i in range(len(layer_size)-1):
+    b=np.random.uniform(-1,1,size=(layer_size[i+1],))
+    bias.append(b)
 
-print(sigmoid.sigmoid(z))
+for j in range(len(layer_size)-1):
+    z=input_arr @ weights[j] +bias[j]
+    input_arr=sigmoid.sigmoid(z)
+
+print(input_arr)
 
 
 
