@@ -1,7 +1,7 @@
 import numpy as np
 import sigmoid
 import loss_func
-import random
+
 
 def backprop(a_output,weights,bias,inputs_list,z_list,y):
 
